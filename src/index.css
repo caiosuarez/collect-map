@@ -16,3 +16,25 @@ body {
   overflow: hidden;
   padding: 20px;
 }
+
+/* scrollbar customization    */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #20252b !important;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2c333b !important;
+}
+
+/* end scrollbar customization  */

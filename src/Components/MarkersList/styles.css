@@ -9,7 +9,11 @@
     border-radius: 5px 5px 0 0;
     color: #fff;
     padding: 10px;
+}
 
+.markers-list-body {
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 .markers-list-item {
