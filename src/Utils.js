@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 const Utils = {
   getConfig: (path) => {
     return new Promise((resolve) => {
@@ -8,6 +10,7 @@ const Utils = {
       });
     });
   },
+  generateId: () => `id_${uuidv4()}`
 };
 
 export default Utils;

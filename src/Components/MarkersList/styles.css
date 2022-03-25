@@ -1,0 +1,25 @@
+.markers-list {
+    box-shadow: 1px 1px 20px 0px #828282;
+    z-index: 5;
+    width: 300px;
+}
+
+.markers-list-header {
+    background-color: #20252b;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    padding: 10px;
+
+}
+
+.markers-list-item {
+    background-color: #fff;
+    border-bottom: 1px solid #e8e9f0;
+    color: #20252b;
+    padding: 10px;
+}
+
+.markers-list-item:last-child {
+    border-radius: 0 0 5px 5px;
+    border-bottom: 0;
+}
