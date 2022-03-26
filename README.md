@@ -8,7 +8,9 @@ https://github.com/google-map-react/google-map-react
 -  Add Markers to map dynamically.
 -  Information about the creation time of the Markers.
 -  Draggable Markers.
--  Ability to delete markers
+-  Ability to delete markers.
+
+![145b4cad-7f25-45f7-9e99-35e80914227f](https://user-images.githubusercontent.com/27926021/160225369-73d4f46d-66f9-44b5-be32-06eec0c83ba1.jpg)
 
 ## Instructions:
 
