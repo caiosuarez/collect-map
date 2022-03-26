@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+div, p, span, button, a, h1, h2, h3 {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .App {
   position: absolute;
   top: 0;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import GoogleMapReact from "google-map-react";
 import Utils from "../../Utils";
@@ -15,14 +15,14 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   const getDefaultCenter = () => {
-    const centerPoint = Math.ceil(coordinates.length / 2);
+    const centerPoint = Math.floor(coordinates.length / 2);
     return {
       lat: coordinates[centerPoint][0],
       lng: coordinates[centerPoint][1],
     };
   };
 
-  const handleApiLoaded = (map, maps) => {
+  const drawPolygon = (map, maps) => {
     const polygonCoords = coordinates.map((coordinate) => {
       return { lat: coordinate[0], lng: coordinate[1] };
     });
@@ -38,20 +38,18 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
     newMap.setMap(map);
   };
 
-  function onChildMouseDown() {
-    console.log("mouse down");
+  const onChildMouseDown = () => {
     setDraggable(false);
-  }
+  };
 
-  function onChildMouseUp() {
-    console.log("mouse up");
+  const onChildMouseUp = () => {
     const markersCopy = [...markers];
     markersCopy.map((item) => (item.moving = false));
     setMarkers(markersCopy);
     setDraggable(true);
-  }
+  };
 
-  function onChildMouseMove(hoverKey, marker, newCoords) {
+  const onChildMouseMove = (hoverKey, marker, newCoords) => {
     const selectedMarkerIndex = markers.findIndex(
       (item) => item.id === hoverKey
     );
@@ -63,17 +61,23 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
       selectedMarker.moving = true;
       setMarkers(markersCopy);
     }
-  }
+  };
 
   const addMarker = () => {
+    const centerCoords = getDefaultCenter();
     const newMarker = {
       id: Utils.generateId(),
-      lat: -53.58821105957031,
-      lng: -15.176399230957031,
+      lat: centerCoords.lat || -53.58821105957031,
+      lng:  centerCoords.lng || -15.176399230957031,
       moving: false,
       createdAt: new Date(),
     };
     setMarkers([...markers, newMarker]);
+  };
+
+  const deleteMarker = (id) => {
+   const filteredMarkers = markers.filter((item) => item.id !== id);
+    setMarkers(filteredMarkers);
   };
 
   return (
@@ -81,6 +85,7 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
       <MarkersList
         markersList={markers}
         containerStyle={{ position: "absolute", top: "2%", left: "2%" }}
+        deleteMarkerFunction={deleteMarker}
       />
       <div className="google-map" style={{ height: height }}>
         <GoogleMapReact
@@ -88,14 +93,13 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
           defaultCenter={getDefaultCenter()}
           defaultZoom={zoomLevel}
           yesIWantToUseGoogleMapApiInternals
-          onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+          onGoogleApiLoaded={({ map, maps }) => drawPolygon(map, maps)}
           draggable={draggable}
           onChildMouseDown={() => onChildMouseDown()}
           onChildMouseUp={() => onChildMouseUp()}
           onChildMouseMove={(key, marker, mouse) =>
             onChildMouseMove(key, marker, mouse)
           }
-          // onChildClick={() => console.log("child click")}
         >
           {markers.map((marker) => (
             <Marker
@@ -108,9 +112,18 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
           ))}
         </GoogleMapReact>
       </div>
-      <button className="add-marker-btn" onClick={() => addMarker()}>
-        Adicionar ponto
-      </button>
+      <div className="action-buttons">
+        <button
+          className="add-marker-btn"
+          onClick={() => addMarker()}
+          style={{ marginRight: "10px" }}
+        >
+          Adicionar ponto
+        </button>
+        <button className="delete-markers-btn" onClick={() => setMarkers([])}>
+          Excluir Pontos
+        </button>
+      </div>
     </div>
   );
 };
@@ -120,7 +133,7 @@ export default Map;
 Map.defaultProps = {
   coordinates: [],
   zoomLevel: 5,
-  height: "500px",
+  height: "90%",
   properties: {},
 };
 
