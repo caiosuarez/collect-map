@@ -18,6 +18,9 @@ To use the google maps API, you will need an api key, add your key in the API_KE
 
 ![image](https://user-images.githubusercontent.com/27926021/160225513-f5c4bb32-5244-4c66-884f-3a33c38d6737.png)
 
+you can get one API Key for free by following these instructions:
+https://developers.google.com/maps/documentation/javascript/get-api-key
+
 ### `npm install`
 
 Installs project dependencies.
