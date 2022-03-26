@@ -6,6 +6,31 @@ import trash from "../../assets/Trash.svg";
 import "./styles.css";
 
 const MarkersList = ({ markersList, containerStyle, deleteMarkerFunction }) => {
+
+  const formatNumber = (number) => {
+    // no formatting in case of negative numbers
+    if(number < 0) {
+      return number;
+    }
+    // formatting for numbers with less than 2 digits
+    if(number < 10) {
+      return `00${number}`;
+    }
+    // formatting for numbers with 2 digits
+    if(number < 100) {
+      return `0${number}`;
+    }
+
+    return number;
+  }
+
+  const formatMinutes = (minutes) => {
+    if(minutes < 10) {
+      return `0${minutes}`;
+    }
+    return minutes;
+  }
+
   return (
     <div className="markers-list" style={containerStyle}>
       <div className="markers-list-header">Listagem de pontos</div>
@@ -30,9 +55,9 @@ const MarkersList = ({ markersList, containerStyle, deleteMarkerFunction }) => {
                 <div className="item-content">
                   <div className="marker-number">
                     <img src={cultureIcon} alt="culture icon" />
-                    {`Ponto nº ${index}`}
+                    {`Ponto nº ${formatNumber(index)}`}
                   </div>
-                  <div className="time-description">{`Criado em:  ${day}/${month}/${year} - ${hours}:${minutes}`}</div>
+                  <div className="time-description">{`Criado em:  ${day}/${month}/${year} - ${hours}:${formatMinutes(minutes)}`}</div>
                 </div>
                 <img
                   className="delete-marker-icon"
