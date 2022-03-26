@@ -18,7 +18,7 @@ To use the google maps API, you will need an api key, add your key in the API_KE
 
 ### `npm install`
 
-Installs project dependencies
+Installs project dependencies.
 
 ### `npm start`
 
