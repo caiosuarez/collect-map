@@ -14,14 +14,6 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
 
   const API_KEY = process.env.REACT_APP_API_KEY;
 
-  const getDefaultCenter = () => {
-    const centerPoint = Math.floor(coordinates.length / 2);
-    return {
-      lat: coordinates[centerPoint][0],
-      lng: coordinates[centerPoint][1],
-    };
-  };
-
   const drawPolygon = (map, maps) => {
     const polygonCoords = coordinates.map((coordinate) => {
       return { lat: coordinate[0], lng: coordinate[1] };
@@ -63,12 +55,20 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
     }
   };
 
+  const getDefaultCenter = () => {
+    const centerPoint = Math.floor(coordinates.length / 2);
+    return {
+      lat: coordinates[centerPoint][0],
+      lng: coordinates[centerPoint][1],
+    };
+  };
+
   const addMarker = () => {
     const centerCoords = getDefaultCenter();
     const newMarker = {
       id: Utils.generateId(),
       lat: centerCoords.lat || -53.58821105957031,
-      lng:  centerCoords.lng || -15.176399230957031,
+      lng: centerCoords.lng || -15.176399230957031,
       moving: false,
       createdAt: new Date(),
     };
@@ -76,7 +76,7 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
   };
 
   const deleteMarker = (id) => {
-   const filteredMarkers = markers.filter((item) => item.id !== id);
+    const filteredMarkers = markers.filter((item) => item.id !== id);
     setMarkers(filteredMarkers);
   };
 
@@ -114,13 +114,13 @@ const Map = ({ coordinates, zoomLevel, height, properties }) => {
       </div>
       <div className="action-buttons">
         <button
-          className="add-marker-btn"
+          className="action-button"
           onClick={() => addMarker()}
           style={{ marginRight: "10px" }}
         >
           Adicionar ponto
         </button>
-        <button className="delete-markers-btn" onClick={() => setMarkers([])}>
+        <button className="action-button" onClick={() => setMarkers([])}>
           Excluir Pontos
         </button>
       </div>
