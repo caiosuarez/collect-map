@@ -12,7 +12,7 @@ https://github.com/google-map-react/google-map-react
 
 ## Instructions:
 
-To use the google maps API, you will need an api key, substitute your key in the API_KEY constant present in the Map component
+To use the google maps API, you will need an api key, add your key in the API_KEY constant present in the Map component.
 
 ### `npm install`
 
